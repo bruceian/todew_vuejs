@@ -55,11 +55,6 @@ export default {
 
     }
   },
-  // methods: {
-  //   addToSelectedArray() {
-  //
-  //   }
-  // },
   computed: {
     filteredProductSearch() {
       return this.products.filter(product =>
@@ -83,5 +78,9 @@ export default {
     flex-direction: column;
     flex-basis: 100%;
     flex: 1;
+  }
+
+  li {
+    cursor: pointer;
   }
 </style>
