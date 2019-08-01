@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <List/>
+    <Dew/>
   </div>
 </template>
 
 <script>
-import List from './components/List.vue'
+import Dew from './components/Dew.vue'
 
 export default {
   name: 'app',
   components: {
-    List
+    Dew
   }
 }
 </script>
