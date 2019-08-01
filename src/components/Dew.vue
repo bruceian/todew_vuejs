@@ -27,8 +27,6 @@
       </ul>
 
     </div>
-<!--
-    <button>Sort</button> -->
 
   </section>
 </template>
@@ -47,18 +45,57 @@ export default {
       items: [
         {
           id: 1,
-          name: 'Advanced Retinoid 2%',
-          type: 'retinoid'
+          name: 'Granactive Retinoid 2% in Squalane',
+          type: 'retinoid',
+          type_id: 1,
         },
         {
           id: 2,
-          name: 'Ascorbyl Glucoside Solution 12%',
-          type: 'water-based'
+          name: 'Granactive Retinoid 5% in Squalane',
+          type: 'retinoid',
+          type_id: 1,
         },
         {
           id: 3,
+          name: 'Granactive Retinoid 2% Emulsion ',
+          type: 'retinoid',
+          type_id: 1,
+        },
+        {
+          id: 4,
+          name: 'Advanced Retinoid 2%',
+          type: 'retinoid',
+          type_id: 1,
+        },
+        {
+          id: 5,
+          name: 'Retinol 0.2% in Squalane',
+          type: 'retinoid',
+          type_id: 1,
+        },
+        {
+          id: 6,
+          name: 'Retinol 0.5% in Squalane',
+          type: 'retinoid',
+          type_id: 1,
+        },
+        {
+          id: 7,
+          name: 'Retinol 1% in Squalane',
+          type: 'retinoid',
+          type_id: 1,
+        },
+        {
+          id: 8,
+          name: 'Ascorbyl Glucoside Solution 12%',
+          type: 'water-based',
+          type_id: 2,
+        },
+        {
+          id: 9,
           name: '"B" Oil',
-          type: 'hydrator'
+          type: 'hydrator',
+          type_id: 3
         }
       ]
     }
@@ -73,14 +110,44 @@ export default {
       if (!found) {
         this.selectedItems.push(item);
       }
+
+      // beginning of sort functions
+      this.oneTypeOnly(this.selectedItems, 'type_id', 1);
+      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, 2);
     },
     removeFromSelected(id) {
-      let allItems = this.items;
-      let item = allItems.find(e => e.id === id);
-      this.selectedItems.pop(item);
-    },
-    sortSelected() {
+      let allSelectedItems = this.selectedItems;
 
+      let itemIndex = allSelectedItems.findIndex(item => item.id === id);
+
+      this.selectedItems.splice(itemIndex, 1);
+
+      // beginning of sort functions, must be checked on delete as well
+      this.oneTypeOnly(this.selectedItems, 'type_id', 1);
+    },
+    oneTypeOnly(array, attr, value) {
+      let counter = 0;
+      for(var i = 0; i < array.length; i += 1) {
+          if(array[i][attr] === value) {
+            counter +=1
+            if(counter > 1) {
+              console.log("too many " + attr + value );
+            } else {
+              console.log("one " + attr + value + " perfect!" );
+            }
+          }
+      }
+    },
+    beforeSameAttrDifferentVal(array, attr, value_1, value_2) {
+      for(var i = 0; i < array.length; i += 1) {
+
+          if(array[i][attr] === value_2 && array[i + 1][attr] === value_1) {
+            let b = array[i];
+            array[i] = array[i + 1];
+            array[i + 1] = b;
+          }
+
+      }
     }
   },
   computed: {
