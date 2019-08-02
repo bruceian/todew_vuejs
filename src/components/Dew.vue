@@ -112,8 +112,11 @@ export default {
       }
 
       // beginning of sort functions
-      this.oneTypeOnly(this.selectedItems, 'type_id', 1);
-      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, 2);
+      this.oneTypeOnly(this.selectedItems, 'type_id', 1); // only 1 retinol can exist in list
+
+      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, 2); // retinol must come before water
+      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, 3); // retinol must come before oil
+      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, 3); // water based must come before oil
     },
     removeFromSelected(id) {
       let allSelectedItems = this.selectedItems;
@@ -139,15 +142,35 @@ export default {
       }
     },
     beforeSameAttrDifferentVal(array, attr, value_1, value_2) {
-      for(var i = 0; i < array.length; i += 1) {
 
-          if(array[i][attr] === value_2 && array[i + 1][attr] === value_1) {
-            let b = array[i];
-            array[i] = array[i + 1];
-            array[i + 1] = b;
+      let swapped;
+      do {
+        swapped = false;
+        for (let i = 0; i < array.length; i += 1) {
+          if(typeof array[i + 1] !== 'undefined') {
+
+            if (array[i][attr] === value_2 && array[i + 1][attr] === value_1) {
+              let tmp = array[i];
+              array[i] = array[i + 1];
+              array[i + 1] = tmp;
+              swapped = true;
+            }
+
           }
-
-      }
+        }
+      } while (swapped);
+      // for(var i = 0; i < array.length; i += 1) {
+      //     // if( swap ) {
+      //       if(array[i][attr] === value_2 && array[i + 1][attr] === value_1) {
+      //         let b = array[i];
+      //         array[i] = array[i + 1];
+      //         array[i + 1] = b;
+      //       }
+      //       // else {
+      //       //   swap = false;
+      //       // }
+      //     // }
+      // }
     }
   },
   computed: {
