@@ -281,7 +281,7 @@ export default {
         {
           id: 40,
           name: '100% Plant-Derived Hemi-Squalane',
-          type: 'oil, last',
+          type: 'oil',
           type_id: 3
         },
         {
@@ -341,19 +341,43 @@ export default {
       }
 
       // beginning of sort functions
+      this.tooManyProducts(this.selectedItems);
+
       this.oneTypeOnly(this.selectedItems, 'type_id', 1);
 
-      // retinol before water-based
-      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, [2,3]);
+      this.conflictTypeID(this.selectedItems, 'type_id', 7, [6,4]);
+
+      // retinol before water-based, oil, vitamin c, antioxidants, peptides
+      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, [2,3,4,6,7]);
       do {
-          this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, [3]);
-      } while (this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, [2,3]));
+          this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, [3,4,6,7]);
+          this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 6, [3]);
+          this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 7, [3]);
+      } while (this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, [2,3,4,6,7]));
 
       // water-based before oil
-      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, [3]);
+      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, [3,4,6,7]);
       do {
-        this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, [2,3]);
-      } while (this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, [3]));
+        this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, [2,3,4,6,7]);
+        this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 6, [3]);
+        this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 7, [3]);
+      } while (this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, [3,4,6,7]));
+
+      // antioxidants before oil
+      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 6, [3]);
+      do {
+        this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, [2,3,4,6,7]);
+        this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, [3,4,6,7]);
+        this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 7, [3]);
+      } while (this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 6, [3]));
+
+      // peptides before oil
+      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 7, [3]);
+      do {
+        this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, [2,3,4,6,7]);
+        this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, [3,4,6,7]);
+        this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 6, [3]);
+      } while (this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 7, [3]));
 
     },
     removeFromSelected(id) {
@@ -365,6 +389,19 @@ export default {
 
       // beginning of sort functions, must be checked on delete as well
       this.oneTypeOnly(this.selectedItems, 'type_id', 1);
+
+      this.tooManyProducts(this.selectedItems);
+
+      this.conflictTypeID(this.selectedItems, 'type_id', 7, [6,4]);
+    },
+    tooManyProducts(array) {
+      if(array.length === 5) {
+        console.log("You sure you need 5 products?");
+      } else if (array.length === 6) {
+        console.log("Six is a lot of things, make sure you know what you're doing.");
+      } else if (array.length >= 7) {
+        console.log( array.length + "is a lot! You still need room for a face mask dude.");
+      }
     },
     oneTypeOnly(array, attr, value) {
       let counter = 0;
@@ -372,11 +409,30 @@ export default {
           if(array[i][attr] === value) {
             counter +=1
             if(counter > 1) {
-              console.log("too many " + attr + value );
+              // console.log("too many " + attr + value );
             } else {
-              console.log("one " + attr + value + " perfect!" );
+              // console.log("one " + attr + value + " perfect!" );
             }
           }
+      }
+    },
+    conflictTypeID(array, attr, value_1, value_2) {
+      let counter = 0;
+      for(var i = 0; i < array.length; i +=1) {
+        if(typeof array[i + 1] !== 'undefined') {
+
+            if (array[i][attr] === value_1 || (value_2.indexOf(array[i][attr]) !== -1) ) {
+              counter +=1;
+              
+              if(counter > 0) {
+                console.log("you cant have " + attr + value_1 + ' and ' + value_2 + ' together' );
+              } else if(counter === 0)  {
+                console.log("no conflicts");
+              }
+            }
+
+
+        }
       }
     },
     beforeSameAttrDifferentVal(array, attr, value_1, value_2) {
