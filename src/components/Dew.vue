@@ -6,11 +6,11 @@
       <input type="text" v-model="search">
 
       <ul>
-          <li v-for="(item, index) in filteredItems"
+          <li v-for="item in filteredItems"
           @click="addToSelected(item.id)"
-          :key="item.id"
+          v-bind:key="item.id"
           >
-          {{ item.name }}
+          {{ item.name }} id: {{item.type_id}}
         </li>
       </ul>
     </div>
@@ -19,8 +19,9 @@
       <h1>To Dew</h1>
 
       <ul>
-        <li v-for="item in selectedItems">
-          {{ item.name }}
+        <li v-for="item in selectedItems"
+        v-bind:key="item.id">
+          {{ item.name }} id: {{item.type_id}}
           <span
           @click="removeFromSelected(item.id)">X</span>
         </li>
@@ -87,16 +88,244 @@ export default {
         },
         {
           id: 8,
-          name: 'Ascorbyl Glucoside Solution 12%',
-          type: 'water-based',
-          type_id: 2,
+          name: 'Ascorbic Acid 8% + Alpha Arbutin 2%',
+          type: 'vitamin-c',
+          type_id: 4
         },
         {
           id: 9,
+          name: 'Ascorbyl Glucoside Solution 12%',
+          type: 'vitamin-c',
+          type_id: 4
+        },
+        {
+          id: 10,
+          name: 'Ascorbyl Tetraisopalmitate Solution 20% in Vitamin F',
+          type: 'vitamin-c',
+          type_id: 4
+        },
+        {
+          id: 11,
+          name: 'Ethylated Ascorbic Acid 15% Solution',
+          type: 'vitamin-c',
+          type_id: 4
+        },
+        {
+          id: 12,
+          name: 'Magnesium Ascorbyl Phosphate 10%',
+          type: 'vitamin-c',
+          type_id: 4
+        },
+        {
+          id: 13,
+          name: 'Vitamin C Suspension 23% + HA Spheres 2%',
+          type: 'vitamin-c',
+          type_id: 4
+        },
+        {
+          id: 14,
+          name: 'Vitamin C Suspension 30% in Silicone',
+          type: 'vitamin-c',
+          type_id: 4
+        },
+        {
+          id: 15,
+          name: 'AHA 30% + BHA 2% Peeling Solution',
+          type: 'water-based, direct-acid',
+          type_id: 2
+        },
+        {
+          id: 16,
+          name: 'Alpha Lipoic Acid 5%',
+          type: 'water-based',
+          type_id: 2
+        },
+        {
+          id: 17,
+          name: 'Azelaic Acid Suspension 10%',
+          type: 'water-based, direct-acid',
+          type_id: 2
+        },
+        {
+          id: 18,
+          name: 'Glycolic Acid 7% Toning Solution',
+          type: 'water-based, direct acid',
+          type_id: 2
+        },
+        {
+          id: 19,
+          name: 'Lactic Acid 5% + HA',
+          type: 'water-based, direct-acid',
+          type_id: 2
+        },
+        {
+          id: 20,
+          name: 'Lactic Acid 10% + HA',
+          type: 'water-based, direct-acid',
+          type_id: 2
+        },
+        {
+          id: 21,
+          name: 'Mandelic Acid 10% + HA',
+          type: 'water-based, direct-acid',
+          type_id: 2
+        },
+        {
+          id: 22,
+          name: 'Salicylic Acid 2% Solution',
+          type: 'water-based, direct-acid',
+          type_id: 2
+        },
+        {
+          id: 23,
+          name: 'Alpha Lipoic Acid 5%',
+          type: 'antioxidants',
+          type_id: 6
+        },
+        {
+          id: 24,
+          name: 'EUK 134 0.1%',
+          type: 'antioxidants',
+          type_id: 6
+        },
+        {
+          id: 25,
+          name: 'Resveratrol 3% + Ferulic Acid 3%',
+          type: 'antioxidants',
+          type_id: 6
+        },
+        {
+          id: 26,
+          name: 'Pycnogenol 5%',
+          type: 'antioxidants',
+          type_id: 6
+        },
+        {
+          id: 27,
           name: '"B" Oil',
-          type: 'hydrator',
+          type: 'oil',
           type_id: 3
-        }
+        },
+        {
+          id: 28,
+          name: '100% Organic Cold-Pressed Borage Seed Oil',
+          type: 'oil',
+          type_id: 3
+        },
+        {
+          id: 29,
+          name: '100% Organic Cold-Pressed Moroccan Argan Oil',
+          type: 'oil',
+          type_id: 3
+        },
+        {
+          id: 30,
+          name: '100% Organic Cold-Pressed Rose Hip Seed Oil',
+          type: 'oil',
+          type_id: 3
+        },
+        {
+          id: 31,
+          name: '100% Organic Virgin Chia Seed Oil',
+          type: 'oil',
+          type_id: 3
+        },
+        {
+          id: 32,
+          name: '100% Cold-Pressed Virgin Marula Oil',
+          type: 'oil',
+          type_id: 3
+        },
+        {
+          id: 33,
+          name: '100% Organic Virgin Sea-Buckthorn Fruit Oil',
+          type: 'oil',
+          type_id: 3
+        },
+        {
+          id: 34,
+          name: '100% Plant-Derived Squalane',
+          type: 'oil',
+          type_id: 3
+        },
+        {
+          id: 35,
+          name: '100% Plant-Derived Squalane',
+          type: 'oil',
+          type_id: 3
+        },
+        {
+          id: 36,
+          name: 'Amino Acids + B5',
+          type: 'water',
+          type_id: 2
+        },
+        {
+          id: 37,
+          name: 'Hyaluronic Acid 2% + B5',
+          type: 'water',
+          type_id: 2
+        },
+        {
+          id: 38,
+          name: 'Marine Hyaluronics',
+          type: 'water',
+          type_id: 2
+        },
+        {
+          id: 39,
+          name: 'Natural Moisturizing Factors + HA',
+          type: 'oil, last',
+          type_id: 3
+        },
+        {
+          id: 40,
+          name: '100% Plant-Derived Hemi-Squalane',
+          type: 'oil, last',
+          type_id: 3
+        },
+        {
+          id: 41,
+          name: 'Alpha Arbutin 2% + HA',
+          type: 'water, more molecules',
+          type_id: 2
+        },
+        {
+          id: 42,
+          name: 'Argireline Solution 10%',
+          type: 'water, more molecules',
+          type_id: 2
+        },
+        {
+          id: 43,
+          name: '"Buffet"',
+          type: 'peptide',
+          type_id: 7
+        },
+        {
+          id: 44,
+          name: '“Buffet” + Copper Peptides 1%',
+          type: 'peptide',
+          type_id: 7
+        },
+        {
+          id: 45,
+          name: 'Caffeine Solution 5% + EGCG',
+          type: 'peptide',
+          type_id: 7
+        },
+        {
+          id: 46,
+          name: 'Matrixyl 10% + HA',
+          type: 'peptide',
+          type_id: 7
+        },
+        {
+          id: 47,
+          name: 'Niacinamide 10% + Zinc 1%',
+          type: 'peptide',
+          type_id: 7
+        },
       ]
     }
   },
@@ -112,11 +341,20 @@ export default {
       }
 
       // beginning of sort functions
-      this.oneTypeOnly(this.selectedItems, 'type_id', 1); // only 1 retinol can exist in list
+      this.oneTypeOnly(this.selectedItems, 'type_id', 1);
 
-      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, 2); // retinol must come before water
-      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, 3); // retinol must come before oil
-      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, 3); // water based must come before oil
+      // retinol before water-based
+      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, [2,3]);
+      do {
+          this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, [3]);
+      } while (this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, [2,3]));
+
+      // water-based before oil
+      this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, [3]);
+      do {
+        this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 1, [2,3]);
+      } while (this.beforeSameAttrDifferentVal(this.selectedItems, 'type_id', 2, [3]));
+
     },
     removeFromSelected(id) {
       let allSelectedItems = this.selectedItems;
@@ -142,35 +380,22 @@ export default {
       }
     },
     beforeSameAttrDifferentVal(array, attr, value_1, value_2) {
-
       let swapped;
       do {
         swapped = false;
-        for (let i = 0; i < array.length; i += 1) {
+        for(var i = 0; i < array.length; i += 1) {
           if(typeof array[i + 1] !== 'undefined') {
 
-            if (array[i][attr] === value_2 && array[i + 1][attr] === value_1) {
-              let tmp = array[i];
+            if( (value_2.indexOf(array[i][attr]) !== -1) && array[i + 1][attr] === value_1) {
+              let b = array[i];
               array[i] = array[i + 1];
-              array[i + 1] = tmp;
+              array[i + 1] = b;
               swapped = true;
             }
-
           }
         }
       } while (swapped);
-      // for(var i = 0; i < array.length; i += 1) {
-      //     // if( swap ) {
-      //       if(array[i][attr] === value_2 && array[i + 1][attr] === value_1) {
-      //         let b = array[i];
-      //         array[i] = array[i + 1];
-      //         array[i + 1] = b;
-      //       }
-      //       // else {
-      //       //   swap = false;
-      //       // }
-      //     // }
-      // }
+      return swapped;
     }
   },
   computed: {
