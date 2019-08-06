@@ -396,11 +396,11 @@ export default {
     },
     tooManyProducts(array) {
       if(array.length === 5) {
-        console.log("You sure you need 5 products?");
+        // console.log("You sure you need 5 products?");
       } else if (array.length === 6) {
-        console.log("Six is a lot of things, make sure you know what you're doing.");
+        // console.log("Six is a lot of things, make sure you know what you're doing.");
       } else if (array.length >= 7) {
-        console.log( array.length + "is a lot! You still need room for a face mask dude.");
+        // console.log( array.length + "is a lot! You still need room for a face mask dude.");
       }
     },
     oneTypeOnly(array, attr, value) {
@@ -417,22 +417,22 @@ export default {
       }
     },
     conflictTypeID(array, attr, value_1, value_2) {
-      let counter = 0;
+      let value_1Boolean = false;
+      let value_2Boolean = false;
       for(var i = 0; i < array.length; i +=1) {
-        if(typeof array[i + 1] !== 'undefined') {
 
-            if (array[i][attr] === value_1 || (value_2.indexOf(array[i][attr]) !== -1) ) {
-              counter +=1;
-              
-              if(counter > 0) {
-                console.log("you cant have " + attr + value_1 + ' and ' + value_2 + ' together' );
-              } else if(counter === 0)  {
-                console.log("no conflicts");
-              }
+            if (array[i][attr] === value_1 ) {
+              value_1Boolean = true;
+            } else if ( (value_2.indexOf(array[i][attr]) !== -1) ) {
+              value_2Boolean = true;
             }
 
+            if( value_1Boolean && value_2Boolean ) {
+              // console.log("you cant have " + attr + value_1 + ' and ' + value_2 + ' together' );
+            } else {
+              // console.log("no conflicts");
+            }
 
-        }
       }
     },
     beforeSameAttrDifferentVal(array, attr, value_1, value_2) {
